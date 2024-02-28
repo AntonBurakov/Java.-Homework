@@ -77,6 +77,8 @@ public class Main {
 
         Scanner scanner3 = new Scanner(System.in);
         double[] transactions = new double[5];
+        String[] names = new String[5];
+        int[] currencyCodes = new int[5];
         System.out.println("Введите размер транзакций");
         for (int i = 0; i < transactions.length; i++) {
             transactions[i] = scanner3.nextDouble();
