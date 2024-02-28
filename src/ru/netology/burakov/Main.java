@@ -1,13 +1,19 @@
 package ru.netology.burakov;
 
+import java.util.Date;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        /*
+        // ДЗ 1
         System.out.println("Hello and welcome!");
 
+
+        // ДЗ 2
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Введите ФИО: ");
@@ -67,5 +73,51 @@ public class Main {
         System.out.println("Номер счета получателя: " + accountNumber);
         System.out.println("Код валюты: " + currencyCode);
         System.out.println("Размер перевода: " + amount);
+        */
+
+        Scanner scanner3 = new Scanner(System.in);
+        double[] transactions = new double[5];
+        System.out.println("Введите размер транзакций");
+        for (int i = 0; i < transactions.length; i++) {
+            transactions[i] = scanner3.nextDouble();
+        }
+
+        for (double transaction : transactions) {
+            System.out.println(transaction);
+        }
+
+        Scanner scanner4 = new Scanner(System.in);
+        Date[] dates = new Date[5];
+        System.out.println("Введите даты транзакций в формате dd/MM/yyyy");
+        for (int i = 0; i < dates.length; i++) {
+            String s = scanner4.nextLine();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            dates[i] = sdf.parse(s);
+        }
+
+        for (Date date : dates) {
+            System.out.println(date);
+        }
+
+        System.out.println("Введите начальную дату периода за который вы хотите посмотреть транзакции");
+        String s = scanner4.nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateStart = sdf.parse(s);
+
+        System.out.println("Введите конечную дату периода за который вы хотите посмотреть транзакции");
+        s = scanner4.nextLine();
+        Date dateEnd = sdf.parse(s);
+
+        System.out.println("Следующие транзакции были произведены за период с " + dateStart + " по " + dateEnd);
+        Main.transactionForPeriod(transactions, dates, dateStart, dateEnd);
+
+    }
+
+    public static void transactionForPeriod (double[] transactions, Date[] dates, Date dateStart, Date dateEnd) {
+        for (int i = 0; i < transactions.length; i++) {
+            if ((dates[i].after(dateStart)) && (dates[i].before(dateEnd))) {
+                System.out.println(transactions[i] + " за дату " + dates[i]);
+            }
+        }
     }
 }
