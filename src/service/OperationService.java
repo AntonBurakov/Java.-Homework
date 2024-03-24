@@ -3,7 +3,6 @@ package service;
 import exception.OperationRuntimeException;
 import model.Operation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static service.IOService.operationStorageService;
@@ -35,23 +34,11 @@ public class OperationService {
     }
 
     public List<Operation> getOperationsCustomer(int clientId) {
-        List<Operation> operationListCustomer = new ArrayList<>();
-        //Лист Id операций
-        List<Integer> operationsIdByCustomer = statementService.operationByCustomer(clientId);
-        //Все операции
-        List<Operation> operationList = operationStorageService.getAll();
-        for (Integer integer : operationsIdByCustomer) {
-            for (Operation operation : operationList) {
-                int operationId = operation.getId();
-                if (integer == operationId) {
-                    operationListCustomer.add(operation);
-                }
-            }
-        }
-        return operationListCustomer;
+        return statementService.operationByCustomer(clientId);
     }
 
     public List<Operation> getAll() {
         return operationStorageService.getAll();
     }
+
 }
